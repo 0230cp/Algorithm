@@ -1,15 +1,18 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
+int n, m;
+string s,a,p;
+
 int main(){
-	int n, m;
-	cin >> n;
-	cin >> m;
+	cin >> n >> m;
 	
-	pair<string, string> p;
-	
-	for(int i = 0; i < n; i++){
-		
+	while(n--){
+		cin >> s;
+		cin >> p;
 	}
 	
+	for(int i = 0;  i < m; i++){
+		cin >> a;
+	}
 }
