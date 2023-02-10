@@ -1,41 +1,37 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int r,c,ma,ret;
-pair<int,int> p;
-queue<pair<int,int>> q;
-int visited[30];
-char a[30][30];
-const int dy[4] = {-1,0,1,0};
-const int dx[4] = {0,1,0,-1};
+int k;
+int a[14];
+vector<int> ret[1030];
 
-
-void solve(int y, int x, int cnt){
-	ret = max(ret, cnt);
-	for(int i = 0; i < 4; i++){
-		int ny = y + dy[i];
-		int nx = x + dx[i];
-		if(ny< 0 || ny >= r || nx < 0 || nx >= c) continue;
-		int next = (int)(a[ny][nx] - 'A');
-		
-		if(visited[next] == 0){
-			visited[next] = 1;
-			solve(ny,nx,cnt+1);
-			visited[next] = 0;
-		}
+void solve(int s, int e, int level){
+	if(s > e) return;
+	if(s == e){
+		ret[level].push_back(a[s]);
+		return;
 	}
+	
+	int mid = (s+e)/2;
+	ret[level].push_back(a[mid]);
+	solve(s,mid-1,level+1);
+	solve(mid+1,e,level+1);
+	return;
 }
 
-
 int main(){
-	cin >> r >> c;
-	
-	for(int i = 0; i < r; i++){
-		for(int j = 0; j < c; j++){
-			cin >> a[i][j];
-		}
+	cin >> k;
+	int end = (int)pow(2,k) - 1;
+	for(int i = 0; i < end; i++){
+		cin >> a[i];
 	}
-	visited[(int)a[0][0] - 'A'] = 1;	
-	solve(0,0,1);
-	cout << ret << '\n';
+	
+	solve(0, end, 1);
+	
+	for(int i = 1; i <= k; i++){
+		for(int j : ret[i]){
+			cout << j << ' ';
+		}
+		cout << '\n';
+	}
 }
