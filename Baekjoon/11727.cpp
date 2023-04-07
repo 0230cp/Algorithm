@@ -7,14 +7,15 @@ int input(){
 	return n;
 }
 
-void sol(int num){
-	vector<int> dp(num+1);
-	dp[0] = 1;
-	dp[1] = 3;
-	for(int i = 2; i < num; i++){
-		dp[i] = (dp[i-1] + dp[i-2] * 2) % 10007;
+void sol(int n){
+	int dp[1004];
+	dp[1] = 1;
+	dp[2] = 3;
+	for(int i = 3; i <= n; i++){
+		dp[i] = dp[i-1] + dp[i-2]*2;
+		dp[i] = dp[i] % 10007;
 	}
-	cout << dp[num-1];
+	cout << dp[n] << '\n';
 }
 
 int main(){
